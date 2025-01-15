@@ -120,7 +120,7 @@ EMBED_GLOBAL_OBJS_RESP=@"C:\php-sdk\phpdev\vs16\x64\php-src\x64\Release_TS\resp\
 
 CFLAGS_EMBED_OBJ=$(CFLAGS_EMBED) 
 
-SAPI_TARGETS=php.exe php8embed.lib 
+SAPI_TARGETS=php.exe php8embed.dll 
 
 CFLAGS_BD_EXT_DATE=/Fp$(BUILD_DIR)\ext\date\ /FR$(BUILD_DIR)\ext\date\ /Fd$(BUILD_DIR)\ext\date\ 
 
@@ -653,10 +653,10 @@ $(BUILD_DIR)\php8embed.lib.res: win32\build\template.rc
 
 $(BUILD_DIR)\php8embed.lib.manifest: win32\build\default.manifest
 	@copy $(PHP_SRC_DIR)\win32\build\default.manifest $(BUILD_DIR)\php8embed.lib.manifest >nul
-php8embed.lib: $(BUILD_DIR)\php8embed.lib
+php8embed.dll: $(BUILD_DIR)\php8embed.dll
 	@echo SAPI sapi\embed build complete
-$(BUILD_DIR)\php8embed.lib: $(DEPS_EMBED) $(EMBED_GLOBAL_OBJS) $(BUILD_DIR)\$(PHPLIB) $(BUILD_DIR)\php8embed.lib.res $(BUILD_DIR)\php8embed.lib.manifest
-	@$(MAKE_LIB) /nologo /out:$(BUILD_DIR)\php8embed.lib $(ARFLAGS) $(EMBED_GLOBAL_OBJS_RESP) $(BUILD_DIR)\$(PHPLIB) $(ARFLAGS_EMBED) $(LIBS_EMBED) $(BUILD_DIR)\php8embed.lib.res
+$(BUILD_DIR)\php8embed.dll: $(DEPS_EMBED) $(EMBED_GLOBAL_OBJS) $(BUILD_DIR)\$(PHPLIB) $(BUILD_DIR)\php8embed.lib.res $(BUILD_DIR)\php8embed.lib.manifest
+	@"$(LINK)" /nologo /DLL /out:$(BUILD_DIR)\php8embed.dll $(ARFLAGS) $(EMBED_GLOBAL_OBJS_RESP) $(BUILD_DIR)\$(PHPLIB) $(ARFLAGS_EMBED) $(LIBS_EMBED) $(BUILD_DIR)\php8embed.lib.res
 
 
 # objects for EXT date

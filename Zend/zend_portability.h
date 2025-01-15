@@ -88,7 +88,7 @@
 #endif
 
 #if defined(ZEND_WIN32) && !defined(__clang__)
-# define ZEND_ASSUME(c)	__assume(c)
+# define ZEND_ASSUME(c)	assert(c)
 #elif defined(__clang__) && __has_builtin(__builtin_assume)
 # pragma clang diagnostic ignored "-Wassume"
 # define ZEND_ASSUME(c)	__builtin_assume(c)
@@ -291,7 +291,7 @@ char *alloca();
 #elif defined(_MSC_VER) && defined(_M_IX86) && _MSC_VER == 1700
 # define ZEND_FASTCALL __fastcall
 #elif defined(_MSC_VER) && _MSC_VER >= 1800 && !defined(__clang__)
-# define ZEND_FASTCALL __vectorcall
+# define ZEND_FASTCALL __fastcall
 #else
 # define ZEND_FASTCALL
 #endif
@@ -342,7 +342,7 @@ char *alloca();
 #   define zend_never_inline
 #  endif
 # elif defined(_MSC_VER)
-#  define zend_always_inline __forceinline
+#  define zend_always_inline inline
 #  define zend_never_inline __declspec(noinline)
 # else
 #  if __has_attribute(always_inline)

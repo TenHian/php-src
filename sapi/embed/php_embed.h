@@ -35,10 +35,16 @@
   php_embed_shutdown(); \
 }
 
-#ifndef PHP_WIN32
-    #define EMBED_SAPI_API SAPI_API
+// #ifndef PHP_WIN32
+//     #define EMBED_SAPI_API SAPI_API
+// #else
+//     #define EMBED_SAPI_API
+// #endif
+
+#ifndef __MINGW64__
+    #define EMBED_SAPI_API __declspec(dllexport)
 #else
-    #define EMBED_SAPI_API
+    #define EMBED_SAPI_API __declspec(dllimport)
 #endif
 
 #ifdef ZTS
