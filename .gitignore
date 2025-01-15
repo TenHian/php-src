@@ -74,7 +74,7 @@ conftest*
 libtool
 
 # Makefile(s) generated from Makefile fragment templates by `./configure`
-Makefile
+# Makefile
 Makefile.fragments
 Makefile.objects
 
